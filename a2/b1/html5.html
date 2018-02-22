@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Title of the document</title>
+    <style type="text/css">
+      #div1 {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+      #div1b {width:350px;height:70px;padding:10px;border:1px solid #aaaaaa;}
+      #div2 {width:100px;height:25px;border:1px solid #aaaaaa; background-color:yellow}
+    </style>
+    <script>
+	function load() {
+            var c=document.getElementById("myCanvas");
+            var ctx=c.getContext("2d");
+            ctx.fillStyle="#FF0000";
+            ctx.fillRect(0,0,150,75);
+
+	    // LINE
+            ctx.moveTo(0,0);
+            ctx.lineTo(200,100);
+            ctx.stroke();
+
+	    // CIRCLE
+            ctx.beginPath();
+            ctx.arc(95,50,40,0,2*Math.PI);
+            ctx.fillStyle="blue";
+            //ctx.stroke();
+            ctx.fill();
+
+	    // TEXT
+            ctx.fillStyle="orange";
+            ctx.font="30px Arial";
+            ctx.fillText("Hello World",10,50);
+            ctx.strokeText("Peter Len",30,70);
+
+	    // GRADIENTS
+            var c2=document.getElementById("canvas2");
+            var ctx2=c2.getContext("2d");
+
+               // Create gradient
+            var grd=ctx2.createLinearGradient(0,0,150,0);
+            grd.addColorStop(0,"red");
+            grd.addColorStop(1,"white");
+
+               // Fill with gradient
+            ctx2.fillStyle=grd;
+            ctx2.fillRect(0,0,c2.width,c2.height);
+        }
+
+        function allowDrop(ev) { ev.preventDefault(); } 
+
+        function drag(ev) {
+            ev.dataTransfer.setData("Text",ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data=ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+
+      </script> 
+
+  </head>
+ 
+  <body onLoad="load()">
+     Content of the document......
+     <p>
+     <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+     </canvas> 
+     <canvas id="canvas2" width="200" height="100" style="border:1px solid #000000;">
+     </canvas> 
+     <p>
+     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+         <polygon points="100,10 40,180 190,60 10,60 160,180"
+                       style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;">
+     </svg>
+     <p>
+     <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+     <div id="div1b" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+     <div id="div2" draggable="true" ondragstart="drag(event)" ></div>
+     <p>
+<input list="browsers">
+
+ <!-- Firefox knows of the datalist but IE 9 does not. -->
+ <datalist id="browsers">
+   <option value="Internet Explorer">
+   <option value="Firefox">
+   <option value="Chrome">
+   <option value="Opera">
+   <option value="Safari">
+ </datalist> 
+
+<menu type="toolbar">
+	llllllll
+<command type="radio" radiogroup="alignment" checked="checked" label="Left" icon="left.png" onclick="setAlign('left')" />
+ 
+</menu>
+
+  </body>
+</html> 
+

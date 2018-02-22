@@ -1,0 +1,130 @@
+<html>
+<script language="javascript">
+  function getHeight() {
+    var div = document.getElementById("test");
+//    alert(document.all("test").offsetHeight);
+//    alert(document.all("test").offsetHeight);
+    alert(div.offsetHeight);
+  }
+  function populate() {
+    var div = document.getElementById("test");
+    div.innerHTML = "";
+    div.innerHTML = "Hello there<p>Peter Len<p>AAAA";
+  }
+  function move() {
+    var div = document.getElementById("test");
+    div.style.top = 300 + "px";
+  }
+  function adjust() {
+    var div = document.getElementById("test");
+    div.style.top = 300 - div.offsetHeight + "px";
+  }
+
+  function closePNote() {
+     var div1 = document.getElementById("pnote");
+     div1.style.visibility = "hidden";
+  }
+  function showNote(evt, dp) {
+     var val = document.mainform.notes.value;
+     var div1 = document.getElementById("pnote");
+     var div2 = document.getElementById("pnoteTxt");
+     var div3 = document.getElementById("pnote_provider");
+
+     div2.innerHTML = "";
+     div2.innerHTML = val;
+
+     div3.innerHTML = "";
+     div3.innerHTML = dp + " Error/Warning Notes";
+
+     var X = getX(evt);
+     var Y = getY(evt);
+
+     div1.style.left = X + "px";
+     div1.style.top = Y + "px";
+     div1.style.visibility = "visible";
+  }
+
+
+  function getX(e) {
+      var posx = 0;
+      if (e.pageX) {
+ 	posx = e.pageX;
+ 
+      }else if (e.clientX) {
+	posx = e.clientX + document.body.scrollLeft
+ 			+ document.documentElement.scrollLeft;
+ 	//posx = e.clientX + document.body.scrollLeft
+ 	//		- document.body.clientLeft;
+      }
+      return posx;
+  }
+  function getY(e) {
+      var posy = 0;
+      if (e.pageY) {
+ 	posy = e.pageY;
+ 
+      }else if (e.clientY) {
+	posy = e.clientY + document.body.scrollTop
+ 			+ document.documentElement.scrollTop;
+ 	//posy = e.clientY + document.body.scrollTop
+        //			- document.body.clientTop;
+      }
+      return posy;
+  }
+
+</script>
+
+<body>
+
+<form name="mainform">
+
+
+<input type="button" onClick="populate()" value="Populate">
+<input type="button" onClick="getHeight()" value="Check Height">
+<br>
+<input type="button" onClick="move()" value="Move">
+<input type="button" onClick="adjust()" value="Adjust">
+<p>
+<div style="background-color:green; position:absolute; width:200px;" id="test"></div>
+
+
+<pre>
+
+
+</pre>
+<hr>
+<textarea name="notes" rows="5" cols="40"></textarea>
+<div id="pnote" style="visibility:hidden; position:absolute; max-width:400px; top:0px; left:0px">
+   <table cellspacing="1" bgcolor="black"><tr><td>
+   <table border="0" cellpadding="3" cellspacing="0" >
+      <tr bgcolor="#6699ff">
+        <td >
+          <table border="0" width="100%">
+            <tr>
+              <td align="left">
+                <font color="red"><b>
+                <div id="pnote_provider"> </div>
+                </b></font>
+              </td>
+              <td align="right">
+                <a onClick="closePNote()"><img src="close.gif"></a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr bgcolor="#e6ecff"><td><div id="pnoteTxt"></div></td></tr>
+   </table>
+   </td></tr></table>
+</div>
+
+<center>
+<table>
+  <tr> <td><a onClick="showNote(event, 'Portico')">Portico</a></td> </tr>
+  <tr> <td><a onClick="showNote(event, 'Portico-CS')">Portico-CS</a></td> </tr>
+  <tr> <td><a onClick="showNote(event, 'MIDB')">MIDB</a></td> </tr>
+</table>
+</center>
+
+</form>
+</html>

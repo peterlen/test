@@ -1,0 +1,85 @@
+<html>
+ <head>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+ </head>
+ <script language="javascript">
+   CURR_TAB = "recipes";
+   function flip(tab) {
+      var bod = document.getElementById(CURR_TAB);
+      bod.id = tab;
+      CURR_TAB = tab;
+      newData(tab);
+   }
+
+
+   function newData(tab) {
+
+      var tc = document.getElementById("content");
+      var newData = getData(tab);
+
+      if (document.all) {
+         // IE
+         
+         //tc.innerText = lbl;
+         tc.innerHTML = newData;
+      
+      }else if(document.getElementById) {
+         // NS 6+
+         
+         // Show the picklist label.
+         var range = document.createRange();
+         range.setStartBefore(tc);
+         var htmlFrag = range.createContextualFragment(newData);
+         while (tc.hasChildNodes()) { tc.removeChild(tc.lastChild); }
+         tc.appendChild(htmlFrag);
+      }
+   }
+
+   function getData(tab) {
+      var html = "";
+      if (tab == "recipes") {
+         html = "<h1>Recipes</h1>";
+         html += "<p>Lorem ipsum dolor sit amet, .</p>";
+
+      }else if (tab == "contact") {
+         html = "<h1>Contact</h1>";
+         html += "<p>Peter Len<br>";
+         html += "7418 Spring Tree Dr.<br>";
+         html += "Springfield, VA  22163</p>";
+
+      }else if (tab == "articles") {
+         html = "<h1>Articles</h1>";
+         html += "<p>The main article is on skiings the alps.</p>";
+
+      }else if (tab == "buy") {
+         html = "<h1>Buy</h1>";
+         html += "<p>Skiing the Alps<br>";
+         html += "Adventure Press<br>";
+         html += "$29.99</p>";
+
+      }
+
+      return html;
+   }
+
+ </script>
+
+ <body>
+ <div id="recipes">
+
+   <ul id="tabnav">
+     <li class="recipes"><a href="javascript:flip('recipes')">Recipes</a></li>
+     <li class="contact"><a href="javascript:flip('contact')">Contact Us</a></li>
+     <li class="articles"><a href="javascript:flip('articles')">Articles</a></li>
+     <li class="buy"><a href="javascript:flip('buy')">Buy Online</a></li>
+   </ul>
+
+   <div id="content">
+     <h1>Recipes</h1>
+     <p>Lorem ipsum dolor sit amet, .</p>
+   </div>
+
+
+ </div>
+ </body>
+</html> 
